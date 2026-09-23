@@ -7,9 +7,12 @@ OZON_TOKEN = os.getenv("API_OZON_TOKEN")
 
 class OZON_API:
     def GetAllCards():
-        url = "https://content-api.wildberries.ru/content/v2/get/cards/list"
+        url = "https://api-seller.ozon.ru/v3/product/list"
         headers = {"Client-Id": OZON_CLIENT,"Api-Key":OZON_TOKEN , "Accept": "application/json"}
         data = {
+            "filter": {
+                "visibility": "ALL"
+            },
             "limit": 1000
         }
         return requests.post(url=url, json=data, headers=headers).json()['result']['items']
